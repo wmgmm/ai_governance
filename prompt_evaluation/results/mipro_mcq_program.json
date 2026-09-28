@@ -1,0 +1,34 @@
+{
+  "traces": [],
+  "train": [],
+  "demos": [],
+  "signature": {
+    "instructions": "Write one multiple-choice exam question about the passage.",
+    "fields": [
+      {
+        "prefix": "Passage:",
+        "description": "${passage}"
+      },
+      {
+        "prefix": "Question:",
+        "description": "${question}"
+      },
+      {
+        "prefix": "Options:",
+        "description": "${options}"
+      },
+      {
+        "prefix": "Answer Index:",
+        "description": "${answer_index}"
+      }
+    ]
+  },
+  "lm": null,
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.13",
+      "dspy": "3.4.0",
+      "cloudpickle": "3.1"
+    }
+  }
+}

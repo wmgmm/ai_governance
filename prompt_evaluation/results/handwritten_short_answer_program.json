@@ -1,0 +1,30 @@
+{
+  "traces": [],
+  "train": [],
+  "demos": [],
+  "signature": {
+    "instructions": "Write one exam question about the passage, with its answer.\nRules:\n- Students will not see the passage, so never mention \"the passage\" or \"the text\".\n- The question must end with a question mark.\n- The answer must be 12 words or fewer, taken from the passage's own ideas.\n- Do not repeat the question's words in the answer.",
+    "fields": [
+      {
+        "prefix": "Passage:",
+        "description": "${passage}"
+      },
+      {
+        "prefix": "Question:",
+        "description": "${question}"
+      },
+      {
+        "prefix": "Answer:",
+        "description": "${answer}"
+      }
+    ]
+  },
+  "lm": null,
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.13",
+      "dspy": "3.4.0",
+      "cloudpickle": "3.1"
+    }
+  }
+}

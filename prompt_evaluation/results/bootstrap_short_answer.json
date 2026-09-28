@@ -1,0 +1,219 @@
+{
+  "stage": "bootstrap",
+  "task": "short_answer",
+  "seed": 7,
+  "n_train": 12,
+  "n_dev": 12,
+  "dspy_version": "3.4.0",
+  "prompt": {
+    "instructions": "Write one exam question, answerable from the passage, with its short answer.",
+    "demos": [
+      {
+        "passage": "A risk-based approach scales controls to the potential for harm. A tool that suggests email subject lines needs light checks, while a system that influences access to healthcare, employment or education needs thorough testing, documentation and oversight. Assessing risk means considering who could be affected, how severely, and how easily a mistake could be noticed and reversed.",
+        "question": "In a risk-based approach, what determines how strong the controls on an AI system should be?",
+        "answer": "The potential for harm"
+      },
+      {
+        "passage": "Documentation such as a model card or system card records what an AI system is for, how it was built and tested, its known limitations, and the conditions under which it should not be used. Good documentation lets someone who was not involved in building the system judge whether it is suitable for their purpose.",
+        "question": "What is the main purpose of a model card or system card?",
+        "answer": "So someone not involved can judge whether it is suitable"
+      },
+      {
+        "passage": "Transparency means people are told when they are interacting with an AI system or when AI has contributed to a decision about them. It also covers explaining, in plain language, what the system does, what data it uses and what its limits are. Transparency supports trust, because people can only question what they know about.",
+        "question": "Why does transparency support trust in AI systems?",
+        "answer": "Because people can only question what they know about"
+      }
+    ]
+  },
+  "score": 81.7,
+  "pass_rates": {
+    "is_a_question": 1.0,
+    "stands_alone": 1.0,
+    "answer_is_short": 0.08333333333333333,
+    "answer_grounded": 1.0,
+    "answer_not_leaked": 1.0
+  },
+  "examples": [
+    {
+      "passage": "When several teams contribute to an AI system, accountability can become blurred. A common remedy is a responsibility matrix that states who builds, who approves, who operates and who monitors the system. Without such clarity, problems fall between teams and nobody acts. Clear accountability also makes it easier for affected people to know whom to contact.",
+      "output": {
+        "question": "What is a common remedy for blurred accountability when several teams contribute to an AI system?",
+        "answer": "A responsibility matrix that states who builds, who approves, who operates, and who monitors the system"
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Good explanations are pitched at the audience. A technical team may need details of the model and its training data, while a member of the public needs to know what the system decided, the main reasons, and how to challenge it. An explanation that is accurate but incomprehensible to its reader does not deliver transparency.",
+      "output": {
+        "question": "How should explanations for an AI system be pitched to different audiences?",
+        "answer": "The explanation should be tailored to the audience; a technical team needs details about the model and training data, while the public needs to know the decision, the main reasons, and how to challenge it."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Automation bias is the tendency to over-trust a system's suggestions, even when other evidence points the other way. It weakens human oversight. Ways to reduce it include showing the system's confidence, asking reviewers to form their own view before seeing the output, and regularly checking a sample of decisions where the reviewer agreed with the system.",
+      "output": {
+        "question": "What is automation bias, and what are some ways to reduce it?",
+        "answer": "Automation bias is the tendency to over-trust a system's suggestions, even when other evidence points the other way. Ways to reduce it include showing the system's confidence, asking reviewers to form their own view before seeing the output, and regularly checking a sample of decisions where the reviewer agreed with the system."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Risk is not fixed when a system is approved. A system used for a new purpose, on a new population, or with a new data source may carry different risks from the ones originally assessed. For this reason, a change in use should trigger a fresh risk assessment rather than relying on the approval given for the original purpose.",
+      "output": {
+        "question": "What should happen if a system is used for a new purpose, population, or data source?",
+        "answer": "A fresh risk assessment should be triggered rather than relying on the original approval."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Pasting personal or confidential information into a general-purpose AI chat tool can send it to a third party, where it may be stored or used in ways the organisation does not control. A simple safeguard is to remove names and identifying details before sharing text, and to use tools the organisation has approved for the sensitivity of the data.",
+      "output": {
+        "question": "What is a simple safeguard to use when pasting personal or confidential information into a general-purpose AI chat tool?",
+        "answer": "Remove names and identifying details before sharing text, and use tools the organization has approved for the sensitivity of the data"
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Bias can enter an AI system through historical data that reflects past unfairness, through labels chosen by people, or through a target that is only a proxy for what matters. For example, using past spending as a proxy for need can disadvantage groups who had less access to a service. Choosing the target carefully is as important as choosing the model.",
+      "output": {
+        "question": "What are some ways bias can enter an AI system?",
+        "answer": "Through historical data reflecting past unfairness, through labels chosen by people, or through a target that is only a proxy for what matters"
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Documentation goes out of date when a system changes. A useful habit is to version the documentation alongside the model, so each release has a matching record of its data, tests and limitations. When documentation and the running system disagree, the documentation stops being evidence and becomes a source of false confidence.",
+      "output": {
+        "question": "What is a useful habit regarding documentation when a system changes?",
+        "answer": "Versioning the documentation alongside the model so each release has a matching record of its data, tests, and limitations"
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Near misses are worth recording even when no harm occurred. They show where controls are weak before a real failure happens. Organisations that only record actual harms tend to learn late, while those that encourage staff to report near misses without fear of blame build an early warning system.",
+      "output": {
+        "question": "What is the benefit of recording near misses, even when no harm has occurred?",
+        "answer": "They show where controls are weak before a real failure happens"
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": true,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 1.0
+    },
+    {
+      "passage": "Suppliers often update the models behind their products without notice, which can change behaviour that an organisation relied on. Contracts can require advance notice of material changes, and organisations can keep a small set of test cases to rerun after each update to check that important behaviour has not shifted.",
+      "output": {
+        "question": "What measures can organizations take to mitigate the risk of unexpected behavior changes when suppliers update AI models?",
+        "answer": "Contracts can require advance notice of material changes, and organizations can keep a small set of test cases to rerun after each update to check that important behavior has not shifted"
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Records themselves carry risk, because logs of inputs and outputs may contain personal data. Good practice is to decide in advance what to log, who can access the logs, and how long they are kept. Records should be kept long enough to be useful and no longer than necessary.",
+      "output": {
+        "question": "What considerations should be made when deciding what to log in records themselves?",
+        "answer": "What to log, who can access the logs, and how long they are kept"
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Challenges to AI decisions are also a source of learning. If many people contest the same kind of decision, that pattern may reveal a flaw in the system or its data. Tracking the number and outcome of challenges turns individual complaints into evidence about how well the system works.",
+      "output": {
+        "question": "How can challenges to AI decisions be useful for improving the system?",
+        "answer": "Tracking the number and outcome of challenges turns individual complaints into evidence about how well the system works"
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Monitoring is only useful if someone acts on it. Each measure should have a threshold that triggers a response, such as a review, retraining or pausing the system, and a named person who receives the alert. A dashboard that nobody watches gives the organisation false reassurance.",
+      "output": {
+        "question": "What is required for monitoring to be useful?",
+        "answer": "Someone must act on it, which involves setting a threshold that triggers a response and assigning a named person to receive the alert."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    }
+  ],
+  "seconds": 6
+}

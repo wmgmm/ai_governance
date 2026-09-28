@@ -1,0 +1,354 @@
+{
+  "stage": "combined",
+  "task": "mcq",
+  "seed": 7,
+  "n_train": 12,
+  "n_dev": 12,
+  "dspy_version": "3.4.0",
+  "prompt": {
+    "instructions": "Based on the provided text, generate one multiple-choice question about the main concept discussed. The question should test comprehension of the key idea. Provide exactly four options: one correct answer and three incorrect but plausible distractors. Ensure all options are of similar length and written in your own words. Finally, provide the 0-based index of the correct option.",
+    "demos": [
+      {
+        "passage": "Transparency means people are told when they are interacting with an AI system or when AI has contributed to a decision about them. It also covers explaining, in plain language, what the system does, what data it uses and what its limits are. Transparency supports trust, because people can only question what they know about.",
+        "question": "Which of these is part of transparency about an AI system?",
+        "options": [
+          "Keeping the use of AI confidential from the people affected",
+          "Telling people when AI has contributed to a decision about them",
+          "Publishing the model's full source code in every case",
+          "Removing human staff from the decision-making process"
+        ],
+        "answer_index": 1
+      },
+      {
+        "passage": "Human oversight means a competent person can monitor an AI system, understand its outputs, and intervene or override it when needed. Oversight only works if the person has the time, training and authority to disagree with the system. A human who simply approves every output without scrutiny provides the appearance of oversight but not the substance.",
+        "question": "Which situation provides only the appearance of human oversight?",
+        "options": [
+          "A trained reviewer who can override the system",
+          "A reviewer with authority to pause the system",
+          "A reviewer who approves every output without scrutiny",
+          "A reviewer who monitors outputs and intervenes"
+        ],
+        "answer_index": 2
+      },
+      {
+        "passage": "Accountability means a named person or role is answerable for how an AI system is used and for its outcomes. It cannot be handed to the system itself or to the supplier who built it. Organisations usually record an accountable owner for each system, who approves its use, signs off changes, and answers questions when something goes wrong.",
+        "question": "Which statement best describes accountability for an AI system?",
+        "options": [
+          "A named person or role is answerable for its use and outcomes",
+          "The supplier who built the system remains answerable for it",
+          "The system itself is answerable for the decisions it makes",
+          "No one is answerable once the system has passed its tests"
+        ],
+        "answer_index": 0
+      }
+    ]
+  },
+  "score": 89.6,
+  "pass_rates": {
+    "is_a_question": 1.0,
+    "stands_alone": 0.9166666666666666,
+    "four_options": 1.0,
+    "options_distinct": 1.0,
+    "index_valid": 1.0,
+    "correct_grounded": 0.9166666666666666,
+    "distractors_not_copied": 1.0,
+    "no_length_giveaway": 0.3333333333333333
+  },
+  "examples": [
+    {
+      "passage": "When several teams contribute to an AI system, accountability can become blurred. A common remedy is a responsibility matrix that states who builds, who approves, who operates and who monitors the system. Without such clarity, problems fall between teams and nobody acts. Clear accountability also makes it easier for affected people to know whom to contact.",
+      "output": {
+        "question": "What is a common solution for managing accountability when multiple teams contribute to an AI system?",
+        "options": [
+          "Relying solely on the supplier's documentation",
+          "Implementing a responsibility matrix detailing roles for building, approving, operating, and monitoring",
+          "Allowing affected people to contact all contributing teams equally",
+          "Ignoring the issue until a problem arises"
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Good explanations are pitched at the audience. A technical team may need details of the model and its training data, while a member of the public needs to know what the system decided, the main reasons, and how to challenge it. An explanation that is accurate but incomprehensible to its reader does not deliver transparency.",
+      "output": {
+        "question": "What is the key requirement for an explanation to deliver transparency?",
+        "options": [
+          "The explanation must include all the technical details of the model and training data",
+          "The explanation must be accurate, even if it is too complex for the audience",
+          "The explanation must be pitched appropriately to the specific audience",
+          "The explanation should focus solely on the system's limitations"
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 1.0
+    },
+    {
+      "passage": "Automation bias is the tendency to over-trust a system's suggestions, even when other evidence points the other way. It weakens human oversight. Ways to reduce it include showing the system's confidence, asking reviewers to form their own view before seeing the output, and regularly checking a sample of decisions where the reviewer agreed with the system.",
+      "output": {
+        "question": "What is automation bias, and what is one method suggested to reduce it?",
+        "options": [
+          "It is the tendency to trust a system even when evidence suggests otherwise; reducing it involves asking reviewers to form their own view first.",
+          "It is the process of regularly checking a sample of decisions where the reviewer agreed with the system.",
+          "It is the act of showing the system's confidence level to the user.",
+          "It is the process of having a named person answerable for the system's outcomes."
+        ],
+        "answer_index": 0
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Risk is not fixed when a system is approved. A system used for a new purpose, on a new population, or with a new data source may carry different risks from the ones originally assessed. For this reason, a change in use should trigger a fresh risk assessment rather than relying on the approval given for the original purpose.",
+      "output": {
+        "question": "Why should a fresh risk assessment be triggered when an AI system is used for a new purpose?",
+        "options": [
+          "Because the original approval automatically becomes invalid for new uses",
+          "To ensure that risks associated with new contexts, populations, or data sources are evaluated",
+          "To save time by reusing the previous risk assessment documentation",
+          "Because the system itself requires a complete re-certification"
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Pasting personal or confidential information into a general-purpose AI chat tool can send it to a third party, where it may be stored or used in ways the organisation does not control. A simple safeguard is to remove names and identifying details before sharing text, and to use tools the organisation has approved for the sensitivity of the data.",
+      "output": {
+        "question": "What is a recommended safeguard when pasting personal or confidential information into a general-purpose AI chat tool?",
+        "options": [
+          "Share the information directly without modification to speed up the process",
+          "Use the tool only for non-sensitive topics",
+          "Remove names and identifying details before sharing the text",
+          "Trust that the chat tool will keep the data completely private"
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 1.0
+    },
+    {
+      "passage": "Bias can enter an AI system through historical data that reflects past unfairness, through labels chosen by people, or through a target that is only a proxy for what matters. For example, using past spending as a proxy for need can disadvantage groups who had less access to a service. Choosing the target carefully is as important as choosing the model.",
+      "output": {
+        "question": "How can bias enter an AI system according to the passage?",
+        "options": [
+          "Only through the system's internal programming logic",
+          "Through historical data reflecting past unfairness or proxy variables",
+          "Solely through the choice of the AI model architecture",
+          "By excluding all human input during the training phase"
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": false,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.75
+    },
+    {
+      "passage": "Documentation goes out of date when a system changes. A useful habit is to version the documentation alongside the model, so each release has a matching record of its data, tests and limitations. When documentation and the running system disagree, the documentation stops being evidence and becomes a source of false confidence.",
+      "output": {
+        "question": "Why is it important to version documentation alongside an AI model?",
+        "options": [
+          "To ensure the system is always running the latest code",
+          "To create a matching record of data, tests, and limitations for each release",
+          "To make the documentation more complex and detailed",
+          "To prove that the system has never changed"
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Near misses are worth recording even when no harm occurred. They show where controls are weak before a real failure happens. Organisations that only record actual harms tend to learn late, while those that encourage staff to report near misses without fear of blame build an early warning system.",
+      "output": {
+        "question": "What is the primary benefit of recording near misses, even when no actual harm has occurred?",
+        "options": [
+          "It proves that the system is functioning perfectly",
+          "It allows organizations to learn about weak controls before a real failure",
+          "It shifts the blame away from the organization",
+          "It ensures that no future incidents will ever happen"
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Suppliers often update the models behind their products without notice, which can change behaviour that an organisation relied on. Contracts can require advance notice of material changes, and organisations can keep a small set of test cases to rerun after each update to check that important behaviour has not shifted.",
+      "output": {
+        "question": "What measure can organizations take to mitigate the risk of unexpected behavior changes after a supplier updates an AI model?",
+        "options": [
+          "Insisting that the supplier never updates the model without prior discussion",
+          "Requiring advance notice for material changes in the contract",
+          "Maintaining a set of test cases to re-run after each update",
+          "Disregarding all updates from the supplier to maintain stability"
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 1.0
+    },
+    {
+      "passage": "Records themselves carry risk, because logs of inputs and outputs may contain personal data. Good practice is to decide in advance what to log, who can access the logs, and how long they are kept. Records should be kept long enough to be useful and no longer than necessary.",
+      "output": {
+        "question": "What is a key consideration when deciding how to manage records generated by an AI system?",
+        "options": [
+          "Keeping all logs indefinitely for future reference",
+          "Ensuring logs are accessible only to the system developers",
+          "Determining what to log, who can access it, and retention limits",
+          "Ignoring the logs if they contain sensitive personal data"
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": false,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Challenges to AI decisions are also a source of learning. If many people contest the same kind of decision, that pattern may reveal a flaw in the system or its data. Tracking the number and outcome of challenges turns individual complaints into evidence about how well the system works.",
+      "output": {
+        "question": "What is the benefit of tracking challenges to AI decisions?",
+        "options": [
+          "It proves that the system is infallible and works perfectly",
+          "It helps identify flaws in the system or its data by revealing patterns",
+          "It shifts the responsibility entirely to the AI developer",
+          "It reduces the need for human review"
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Monitoring is only useful if someone acts on it. Each measure should have a threshold that triggers a response, such as a review, retraining or pausing the system, and a named person who receives the alert. A dashboard that nobody watches gives the organisation false reassurance.",
+      "output": {
+        "question": "What is crucial for monitoring measures to be effective?",
+        "options": [
+          "Having a complex dashboard that shows all system metrics",
+          "A system that automatically triggers retraining without human review",
+          "Setting thresholds that trigger a response and assigning an alert to a named person",
+          "Ensuring the system has perfect performance before monitoring begins"
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.875
+    }
+  ],
+  "answer_positions": {
+    "A": 1,
+    "B": 6,
+    "C": 5,
+    "D": 0
+  },
+  "seconds": 37
+}

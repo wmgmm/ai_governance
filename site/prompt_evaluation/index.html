@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Governance - Prompt Evaluation</title>
+    <meta name="description" content="Measure and optimise a prompt with DSPy on a local Gemma model served by llama.cpp, using AI governance exam questions as the example.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<nav class="global-nav">
+    <div class="nav-content">
+        <a class="nav-brand" href="../index.html" style="opacity:1">AI Governance</a>
+        <a href="#why">Why</a>
+        <a href="#steps">Five steps</a>
+        <a href="#results">Results</a>
+        <a href="#lessons">Lessons</a>
+        <a href="#monday">On Monday</a>
+        <a href="#setup">Setup</a>
+    </div>
+</nav>
+
+<div class="container">
+    <header class="hero">
+        <p class="subtitle">AI Governance &middot; Module 1</p>
+        <h1>Prompt Evaluation</h1>
+        <p class="lede">Do not just trust a prompt. Measure how well it works. Then see whether an <em>optimiser</em>, a program that tries changes to the prompt and keeps the ones that score best, can improve it. Everything runs on your own computer with a small open AI model. The example task is writing exam questions about AI governance. You can read the findings without running any code.</p>
+    </header>
+
+    <section id="start" class="section-card">
+        <div class="section-header">
+            <div class="eyebrow">Start here</div>
+            <h2>Two ways to use this page</h2>
+        </div>
+        <div class="inner-grid">
+            <div class="inner-card"><span class="inner-card-icon" aria-hidden="true">&#128214;</span><strong>I want the ideas, not the code</strong><p>About 10 minutes, no setup. Read <a href="#why">Why this matters</a>, then <a href="#monday">What to do on Monday</a> and the <a href="#lessons">Lessons</a>. Skip Setup and the code boxes; nothing on the page depends on them.</p></div>
+            <div class="inner-card"><span class="inner-card-icon" aria-hidden="true">&#128187;</span><strong>I want to run it</strong><p>About 20 minutes to set up and a few minutes to run. You need a terminal, git, Python 3.11 or later and about 6 GB of disk. Go to <a href="#setup">Setup</a>.</p></div>
+        </div>
+        <div class="callout governance">
+            <strong>If you only read one thing</strong>
+            <div class="callout-body">Write down what a good answer looks like as a short checklist, test your prompt against it on a handful of examples, and put the checklist&rsquo;s rules into the prompt in plain words. In this experiment, those written rules did most of the improving; the automatic optimiser added polish.</div>
+        </div>
+    </section>
+
+    <!-- WHY -->
+    <section id="why" class="section-card">
+        <div class="section-header">
+            <div class="eyebrow">Why this matters</div>
+            <h2>A prompt is a component. Test it like one.</h2>
+        </div>
+        <p>Most prompts are written, tried on two or three examples, and put to use because the output &ldquo;looked fine&rdquo;. After that, nobody can say how well the prompt works, or what the evidence is. Nobody can say if it still works after the AI model changes.</p>
+        <div class="callout governance">
+            <strong>The governance view</strong>
+            <div class="callout-body">AI governance is knowing who decided what, on what evidence, and who answers for it. For a prompt, the evidence has three parts: a written description of what &ldquo;good&rdquo; means, a set of test cases, and a score that anyone can get again by rerunning the test.</div>
+        </div>
+        <p>This module uses <a href="https://dspy.ai/">DSPy</a>, a Python toolkit. DSPy treats a prompt like a piece of software: you can test it, score it and improve it. You do not need DSPy for the ideas; the same steps work with any chat tool. The task is to write exam questions from short passages about AI governance principles. There are two kinds of question:</p>
+        <div class="inner-grid">
+            <div class="inner-card"><span class="inner-card-icon" aria-hidden="true">&#9998;</span><strong>Short answer</strong><p>One question and a short answer. Both must be <em>grounded</em> in the passage: based on what it actually says.</p></div>
+            <div class="inner-card"><span class="inner-card-icon" aria-hidden="true">&#9745;</span><strong>Multiple choice</strong><p>One question, four options, and which option is correct.</p></div>
+            <div class="inner-card"><span class="inner-card-icon" aria-hidden="true">&#128187;</span><strong>Fully local</strong><p>The model is Gemma 4 E2B, a small model from Google. It runs in llama.cpp, software that runs AI models on an ordinary computer. No data leaves your machine, and runs cost nothing.</p></div>
+        </div>
+        <p class="muted">The passages cover twelve principles that will not go out of date. They are: accountability, transparency, human oversight, risk-proportionate controls (stronger checks where the risk is higher), data minimisation (collecting only the data you need), bias testing, documentation, incident handling, supplier due diligence (checking the companies you buy AI from), record-keeping, contestability (letting people challenge a decision) and monitoring.</p>
+    </section>
+
+    <!-- FIVE STEPS -->
+    <section id="steps" class="section-card">
+        <div class="section-header">
+            <div class="eyebrow">How it works</div>
+            <h2>Five steps</h2>
+            <p>The same five steps apply to any prompt you rely on, with or without DSPy. Non-coders can skip the code boxes; the text around them carries the idea.</p>
+        </div>
+
+        <details open>
+            <summary><span class="ex-num">01</span><span>Describe the task, not the prompt</span></summary>
+            <div class="details-content">
+                <p>In DSPy you do not write the prompt itself. You list what goes in and what should come out. DSPy calls this list a <em>signature</em>, and it writes the actual prompt for you. This keeps <strong>what you want</strong> apart from <strong>how you ask</strong>. The &ldquo;how you ask&rdquo; part is what an optimiser can change.</p>
+<pre class="code"><code>class MultipleChoiceQuestion(dspy.Signature):
+    """Write one multiple-choice exam question about the passage."""
+
+    passage: str = dspy.InputField()
+    question: str = dspy.OutputField()
+    options: list[str] = dspy.OutputField()
+    answer_index: int = dspy.OutputField()</code></pre>
+            </div>
+        </details>
+
+        <details>
+            <summary><span class="ex-num">02</span><span>Collect examples, and keep some back</span></summary>
+            <div class="details-content">
+                <p>There are 24 hand-written passages. Each comes with a hand-written short-answer question and a hand-written multiple-choice question. These are the <em>reference</em> questions: examples of what good looks like. Twelve passages are for training, which means improving the prompt. The other twelve are <em>held back</em>: kept aside and used only for testing. Each principle appears once in each half.</p>
+                <p>The optimisers only ever see the training half. Every score on this page comes from the held-back half. So a prompt cannot score well by memorising its test.</p>
+            </div>
+        </details>
+
+        <details>
+            <summary><span class="ex-num">03</span><span>Write down what &ldquo;good&rdquo; means (the metric)</span></summary>
+            <div class="details-content">
+                <p>This is the most important step. The <em>metric</em> is the scoring rule: a small piece of code that gives one output a score. Here it is a checklist anyone can read. No second AI acts as a judge:</p>
+                <div class="inner-grid">
+                    <div class="inner-card"><strong>Short answer</strong><ul style="padding-left:18px;margin:6px 0 0">
+                        <li>It is a question</li><li>It stands alone: students will not see the passage</li><li>Answer is 12 words or fewer</li><li>Answer is grounded in the passage</li><li>Answer is not given away by the question</li></ul></div>
+                    <div class="inner-card"><strong>Multiple choice</strong><ul style="padding-left:18px;margin:6px 0 0">
+                        <li>It is a question, and it stands alone</li><li>Four different options, and the number of the correct option points to one of them</li><li>Correct option grounded in the passage</li><li>Wrong options not copied from the passage</li><li>Correct option not noticeably the longest</li></ul></div>
+                </div>
+<pre class="code"><code>def short_answer_checks(passage, pred):
+    q, a = str(pred.question).strip(), str(pred.answer).strip()
+    return {
+        "is_a_question": q.endswith("?") and len(q.split()) &gt;= 5,
+        "stands_alone": stands_alone(q),
+        "answer_is_short": 0 &lt; len(a.split()) &lt;= 12,
+        "answer_grounded": overlap(a, passage) &gt;= 0.6,
+        "answer_not_leaked": overlap(a, q) &lt; 0.6,
+    }</code></pre>
+                <p class="muted">Before trusting it, the metric was run on the 48 hand-written reference questions, which should all pass. They did not, at first: see the lessons.</p>
+            </div>
+        </details>
+
+        <details>
+            <summary><span class="ex-num">04</span><span>Measure the starting point</span></summary>
+            <div class="details-content">
+                <p>Run the plain prompt on the held-back passages and score every output. This first score is the <em>baseline</em>: the starting point that every change is compared with. Then run the same test again. If the score moves between identical runs, that movement is <em>noise</em> (random variation). Differences between prompts that are smaller than the noise mean nothing.</p>
+<pre class="code"><code>evaluate = dspy.Evaluate(devset=devset, metric=mcq_metric, num_threads=4)
+evaluate(dspy.Predict(MultipleChoiceQuestion))</code></pre>
+            </div>
+        </details>
+
+        <details>
+            <summary><span class="ex-num">05</span><span>Optimise, then measure again on the held-back set</span></summary>
+            <div class="details-content">
+                <p>Here are four ways to improve the prompt. All four are scored the same way. The last three use a DSPy optimiser.</p>
+                <div class="inner-grid">
+                    <div class="inner-card"><strong>Hand-written rules</strong><p>A person copies the checklist rules into the prompt&rsquo;s instructions. This is traditional prompt engineering.</p></div>
+                    <div class="inner-card"><strong>BootstrapFewShot</strong><p>Runs the prompt on the training passages. It keeps up to three outputs that pass every check, and adds them to the prompt as worked examples.</p></div>
+                    <div class="inner-card"><strong>MIPROv2</strong><p>Also asks the model to suggest new instructions. It then tries different mixes of instructions and examples, and keeps the best one.</p></div>
+                    <div class="inner-card"><strong>Hand-written + MIPROv2</strong><p>MIPROv2 starting from the person's instructions rather than from scratch.</p></div>
+                </div>
+<pre class="code"><code>optimiser = dspy.MIPROv2(metric=mcq_metric, auto="light", seed=7)
+better = optimiser.compile(dspy.Predict(MultipleChoiceQuestion), trainset=trainset)
+better.save("results/mipro_mcq_program.json")</code></pre>
+                <p class="muted">The saved file is the improved prompt: its instructions and its chosen examples. It is a plain text (JSON) file, so you can keep each version and review the changes.</p>
+            </div>
+        </details>
+    </section>
+
+    <!-- RESULTS (generated by prompt_evaluation/make_results_page.py; do not edit by hand) -->
+    <section id="results" class="section-card">
+        <div class="section-header">
+            <div class="eyebrow">Results</div>
+            <h2>What each approach achieved</h2>
+        </div>
+<!-- RESULTS:START -->
+<div class="callout governance"><strong>In short</strong><div class="callout-body">On short-answer questions, writing the checklist into the prompt as plain rules raised the score from 76.7 to 93.3 out of 100. Adding the optimiser on top reached 98.3. The optimiser on its own scored 76.7. The person’s rules did most of the work.</div></div>
+<p class="exercise-note">Measured on the <strong>12 held-back test passages</strong> the optimisers never saw (DSPy 3.4.0, Gemma 4 E2B (Q8) on llama.cpp, random seed 7). Each score is the share of checklist items passed, averaged over the passages, out of 100: 100 means every question passed every check. Where a prompt was run five times, the bracket shows the average and the typical spread. Single runs move by up to about 3 points by chance alone, so treat smaller gaps as ties.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Prompt</th><th scope="col">Short answer</th><th scope="col">Multiple choice</th></tr></thead><tbody><tr><th scope="row"><strong>Baseline</strong><br><span class="muted">The plain prompt DSPy writes from the signature.</span></th><td><strong>76.7</strong><span class="muted"> (5 reruns: 75.7 ± 0.9)</span></td><td><strong>85.4</strong><span class="muted"> (5 reruns: 85.6 ± 1.6)</span></td></tr><tr><th scope="row"><strong>Hand-written rules</strong><br><span class="muted">A person copies the checklist rules into the prompt&#x27;s instructions.</span></th><td><strong>93.3</strong><span class="muted"> (5 reruns: 95.7 ± 1.9)</span></td><td><strong>89.6</strong><span class="muted"> (5 reruns: 87.9 ± 1.4)</span></td></tr><tr><th scope="row"><strong>BootstrapFewShot</strong><br><span class="muted">Adds up to three worked examples that pass the metric.</span></th><td><strong>81.7</strong></td><td><strong>84.4</strong></td></tr><tr><th scope="row"><strong>MIPROv2</strong><br><span class="muted">Proposes new instructions and picks the best instruction and examples.</span><br><span class="muted">It kept the plain prompt and no examples, so it scored the same as the baseline.</span></th><td><strong>76.7</strong></td><td><strong>85.4</strong></td></tr><tr><th scope="row"><strong>Hand-written + MIPROv2</strong><br><span class="muted">MIPROv2 starting from the hand-written instructions.</span></th><td><strong>98.3</strong></td><td><strong>89.6</strong></td></tr></tbody></table></div>
+<h3>Which checks each prompt passes</h3>
+<h4>Short answer</h4><div class="table-wrap"><table class="compact"><thead><tr><th scope="col">Check</th><th scope="col">Baseline</th><th scope="col">Hand-written rules</th><th scope="col">BootstrapFewShot</th><th scope="col">MIPROv2</th><th scope="col">Hand-written + MIPROv2</th></tr></thead><tbody><tr><th scope="row">Is a question</th><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr><tr><th scope="row">Stands alone (no “passage”)</th><td>83%</td><td>100%</td><td>100%</td><td>83%</td><td>100%</td></tr><tr><th scope="row">Answer ≤ 12 words</th><td>0%</td><td>92%</td><td>8%</td><td>0%</td><td>100%</td></tr><tr><th scope="row">Answer grounded in passage</th><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr><tr><th scope="row">Answer not in question</th><td>100%</td><td>75%</td><td>100%</td><td>100%</td><td>92%</td></tr></tbody></table></div>
+<h4>Multiple choice</h4><div class="table-wrap"><table class="compact"><thead><tr><th scope="col">Check</th><th scope="col">Baseline</th><th scope="col">Hand-written rules</th><th scope="col">BootstrapFewShot</th><th scope="col">MIPROv2</th><th scope="col">Hand-written + MIPROv2</th></tr></thead><tbody><tr><th scope="row">Is a question</th><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr><tr><th scope="row">Stands alone (no “passage”)</th><td>67%</td><td>83%</td><td>83%</td><td>67%</td><td>92%</td></tr><tr><th scope="row">Four options</th><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr><tr><th scope="row">Options distinct</th><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr><tr><th scope="row">Correct option identified</th><td>100%</td><td>100%</td><td>92%</td><td>100%</td><td>100%</td></tr><tr><th scope="row">Correct option grounded</th><td>92%</td><td>50%</td><td>33%</td><td>92%</td><td>92%</td></tr><tr><th scope="row">Wrong options not copied from passage</th><td>92%</td><td>100%</td><td>83%</td><td>92%</td><td>100%</td></tr><tr><th scope="row">Correct option not the longest</th><td>33%</td><td>83%</td><td>83%</td><td>33%</td><td>33%</td></tr></tbody></table></div>
+<h3>Where the correct answer sits</h3><p class="exercise-note">Counts of which letter (A to D) held the correct answer. Across 12 multiple-choice questions a fair spread is about 3 per letter. No prompt fixed this, because each question is written on its own. Shuffle the options in code instead.</p>
+<div class="table-wrap"><table class="compact"><thead><tr><th scope="col">Prompt</th><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th><th scope="col">D</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>
+<h3>The same passage, before and after</h3>
+<div class="inner-grid"><div class="inner-card"><strong>Short answer: baseline</strong><div class="prompt-box">Q: What is a common remedy for blurred accountability when several teams contribute to an AI system?
+A: A common remedy is a responsibility matrix that specifies who builds, approves, operates, and monitors the system.</div><p class="muted">Fails: Answer ≤ 12 words</p></div><div class="inner-card"><strong>Short answer: hand-written + MIPROv2</strong><div class="prompt-box">Q: What remedy addresses blurred accountability when multiple teams contribute to an AI system?
+A: A responsibility matrix stating who builds, approves, operates, and monitors</div><p class="muted">Passes every check</p></div></div>
+<div class="inner-grid"><div class="inner-card"><strong>Multiple choice: baseline</strong><div class="prompt-box">Q: What is a common remedy mentioned for blurring accountability when several teams contribute to an AI system?
+  A. Implementing stricter coding standards
+  B. Establishing a responsibility matrix   ← marked correct
+  C. Increasing the number of contributing teams
+  D. Focusing solely on system performance metrics</div><p class="muted">Fails: Stands alone (no “passage”)</p></div><div class="inner-card"><strong>Multiple choice: hand-written + MIPROv2</strong><div class="prompt-box">Q: What is a common solution for managing accountability when multiple teams contribute to an AI system?
+  A. Relying solely on the supplier&#x27;s documentation
+  B. Implementing a responsibility matrix detailing roles for building, approving, operating, and monitoring   ← marked correct
+  C. Allowing affected people to contact all contributing teams equally
+  D. Ignoring the issue until a problem arises</div><p class="muted">Fails: Correct option not the longest</p></div></div>
+<h3>The prompts the optimisers chose</h3>
+<details><summary><span>Hand-written rules: Short answer</span></summary><div class="details-content"><div class="prompt-box">Write one exam question about the passage, with its answer.
+Rules:
+- Students will not see the passage, so never mention &quot;the passage&quot; or &quot;the text&quot;.
+- The question must end with a question mark.
+- The answer must be 12 words or fewer, taken from the passage&#x27;s own ideas.
+- Do not repeat the question&#x27;s words in the answer.</div></div></details>
+<details><summary><span>Hand-written rules: Multiple choice</span></summary><div class="details-content"><div class="prompt-box">Write one multiple-choice exam question about the passage.
+Rules:
+- Students will not see the passage, so never mention &quot;the passage&quot; or &quot;the text&quot;.
+- Give exactly four options: one correct, three plausible but wrong.
+- Keep all four options about the same length, so the answer does not stand out.
+- Write the wrong options in your own words, not copied from the passage.
+- answer_index is the 0-based position of the correct option.</div></div></details>
+<details><summary><span>BootstrapFewShot: Short answer</span></summary><div class="details-content"><div class="prompt-box">Write one exam question, answerable from the passage, with its short answer.</div><p class="muted">Plus 3 worked example(s).</p></div></details>
+<details><summary><span>BootstrapFewShot: Multiple choice</span></summary><div class="details-content"><div class="prompt-box">Write one multiple-choice exam question about the passage.</div><p class="muted">Plus 3 worked example(s).</p></div></details>
+<details><summary><span>MIPROv2: Short answer</span></summary><div class="details-content"><div class="prompt-box">Write one exam question, answerable from the passage, with its short answer.</div></div></details>
+<details><summary><span>MIPROv2: Multiple choice</span></summary><div class="details-content"><div class="prompt-box">Write one multiple-choice exam question about the passage.</div></div></details>
+<details><summary><span>Hand-written + MIPROv2: Short answer</span></summary><div class="details-content"><div class="prompt-box">Based on the provided text about AI ethics concepts, generate one exam question and its corresponding answer pair. Ensure the question requires extracting specific information, the answer is concise (12 words or fewer), and the answer is derived strictly from the text without repeating words from the question.</div><p class="muted">Plus 3 worked example(s).</p></div></details>
+<details><summary><span>Hand-written + MIPROv2: Multiple choice</span></summary><div class="details-content"><div class="prompt-box">Based on the provided text, generate one multiple-choice question about the main concept discussed. The question should test comprehension of the key idea. Provide exactly four options: one correct answer and three incorrect but plausible distractors. Ensure all options are of similar length and written in your own words. Finally, provide the 0-based index of the correct option.</div><p class="muted">Plus 3 worked example(s).</p></div></details>
+<h3>What MIPROv2 proposed, and threw away</h3><p class="exercise-note">Candidate instructions for the short-answer task, written by the same 2B model. None mentions answer length or the passage, because the proposer never sees the metric. Notice the narrowed topic list: the data covers twelve principles.</p><div class="prompt-box">You are an expert question generation system. Your task is to analyze the provided descriptive passage on AI ethics and governance concepts (such as Accountability, Transparency, and Human oversight) and generate exactly one high-stakes, exam-style question based *only* on the information present in the text. Following the question, provide a concise, direct answer that is strictly derivable from the passage. Ensure the question tests a deep understanding of the ethical principle described.
+
+Passage: [Insert Descriptive Passage Here]
+
+Format your output strictly as:
+Question: [Your high-stakes question here]
+Answer: [Your concise answer here]</div><div class="prompt-box">Given a passage about AI ethics and governance concepts such as Accountability, Transparency, and Human oversight, generate one concise question that can be answered strictly by extracting information from the passage, and provide the corresponding short answer.</div>
+<!-- RESULTS:END -->
+    </section>
+
+    <!-- LESSONS -->
+    <section id="lessons" class="section-card">
+        <div class="section-header">
+            <div class="eyebrow">Lessons</div>
+            <h2>Prompt engineering lessons from one small experiment</h2>
+            <p>Each lesson comes from something that happened while building this module.</p>
+        </div>
+
+        <details open>
+            <summary><span class="ex-num">01</span><span>The metric is the specification</span></summary>
+            <div class="details-content">
+                <p>The first metric only checked that outputs had the right format. The plain prompt scored 83 and 96 out of 100. That looked good, but the questions were poor. Answers ran to 50 words. Questions said &ldquo;according to the passage&rdquo;, but students would never see the passage. A high score from a weak metric gives false comfort. Decide what good means, in terms you can check, before you try to improve anything.</p>
+            </div>
+        </details>
+        <details open>
+            <summary><span class="ex-num">02</span><span>Test the checker before you trust it</span></summary>
+            <div class="details-content">
+                <p>Run the metric on answers you know are good. Also read a few outputs yourself. Here, one reference question failed because it was an instruction (&ldquo;Give one way&hellip;&rdquo;), not a question. A strict word match also marked a correct model answer as not grounded. The answer said &ldquo;building&rdquo; where the passage said &ldquo;builds&rdquo;. Then a stricter length check was added, and 15 of the 24 hand-written multiple-choice questions failed it. The author had made the longest option the correct one. That is exactly the flaw the check was added to catch in the model. People make the mistakes they look for in machines.</p>
+            </div>
+        </details>
+        <details open>
+            <summary><span class="ex-num">03</span><span>Say the rule. Examples alone do not carry it.</span></summary>
+            <div class="details-content">
+                <p>BootstrapFewShot showed the model three short, correct answers, and it still wrote long ones. One line of instruction, &ldquo;The answer must be 12 words or fewer&rdquo;, fixed almost every answer. Small models copy the format of examples more easily than qualities nobody states, such as being short.</p>
+            </div>
+        </details>
+        <details open>
+            <summary><span class="ex-num">04</span><span>An optimiser cannot find a rule it cannot see</span></summary>
+            <div class="details-content">
+                <p>MIPROv2 asks the model to suggest better instructions, based on the data and the program. But it never shows the model the metric. The suggestions added drama (&ldquo;a high-stakes certification exam&rdquo;). They also narrowed the topic to three principles the model happened to see. None mentioned answer length. When MIPROv2 started from the hand-written rules instead, it gave the highest short-answer score. That was a little above the rules alone. On multiple choice it tied. In this experiment the person&rsquo;s rules did most of the work. The optimiser added examples and polish.</p>
+            </div>
+        </details>
+        <details open>
+            <summary><span class="ex-num">05</span><span>Fixing one rule can break another</span></summary>
+            <div class="details-content">
+                <p>The hand-written rules told the model to keep all options the same length, and to write the wrong options in its own words. After that, fewer correct answers stood out. But the model also reworded the <em>correct</em> answer, so it drifted away from the passage. When MIPROv2 then rewrote those instructions, the correct answers matched the passage again. But the correct option was once again often the longest. Check every rule after every change, not only the one you were fixing.</p>
+            </div>
+        </details>
+        <details open>
+            <summary><span class="ex-num">06</span><span>Do in code what code does reliably</span></summary>
+            <div class="details-content">
+                <p>Every prompt put the correct answer at B or C far more often than chance, and almost never at A. Each question is written separately, so no prompt can balance a set. Two lines of code can: shuffle the options and update the index. Use prompts for things that need judgement. Use code for fixed rules.</p>
+<pre class="code"><code>order = random.sample(range(4), 4)
+options, answer_index = [options[i] for i in order], order.index(answer_index)</code></pre>
+            </div>
+        </details>
+        <details open>
+            <summary><span class="ex-num">07</span><span>Measure the noise before celebrating</span></summary>
+            <div class="details-content">
+                <p>The same prompt, run five times on the same passages, moved by up to about 3 points. That is the noise. With only twelve test passages, one question is worth several points. Differences smaller than the noise are ties, however good the chart looks. More test cases shrink the noise. More tests always beat cleverer tests.</p>
+            </div>
+        </details>
+        <details open>
+            <summary><span class="ex-num">08</span><span>A passing score is not a good question</span></summary>
+            <div class="details-content">
+                <p>The metric checks format, and whether answers are grounded in the passage. It cannot tell if a question tests understanding or just memory. It cannot tell if a question is fair to every student, or even correct. That still needs a subject expert. Use the score to compare prompt versions, and to spot when a change makes things worse. Use people to approve the questions.</p>
+            </div>
+        </details>
+        <details open>
+            <summary><span class="ex-num">09</span><span>Keep the record</span></summary>
+            <div class="details-content">
+                <p>Every run writes the model, DSPy version, seed, data split, prompt, outputs and scores to <code>results/</code>. That record is what lets someone else check the claim, and what you rerun when the model, the brief or the data changes. Without that record, a prompt is just an experiment. With it, the prompt is a governed part of your system.</p>
+            </div>
+        </details>
+
+        <div class="callout governance">
+            <strong>Take it further</strong>
+            <div class="callout-body">The <a href="https://wmgmm.github.io/thematts/governance.html">AI Governance in the Workplace</a> workshop applies the same ideas without code. It uses a generator (something that writes), an evaluator that checks the work against a written marking guide, tests where the right answer is already known, and a person who gives final approval.</div>
+        </div>
+    </section>
+
+    <section id="monday" class="section-card">
+        <div class="section-header">
+            <div class="eyebrow">No code needed</div>
+            <h2>What to do on Monday</h2>
+            <p>The same lessons, for a prompt you use in Copilot, ChatGPT or any chat tool.</p>
+        </div>
+        <div class="quick-start">
+            <div class="quick-step"><span class="step-badge">1</span>Write a checklist of what a good answer must do, in checkable terms (for example &ldquo;12 words or fewer&rdquo;, not &ldquo;concise&rdquo;).</div>
+            <div class="quick-step"><span class="step-badge">2</span>Collect 10 or more real inputs, including awkward ones, and keep them in a file you reuse.</div>
+            <div class="quick-step"><span class="step-badge">3</span>Try the checklist on answers you already know are good. If they fail, fix the checklist first.</div>
+            <div class="quick-step"><span class="step-badge">4</span>Put every rule in the prompt in plain words. Examples alone do not carry a rule.</div>
+            <div class="quick-step"><span class="step-badge">5</span>After any change, run all the inputs again and tick every item, not just the one you fixed.</div>
+            <div class="quick-step"><span class="step-badge">6</span>Run the same prompt twice before believing a small improvement.</div>
+            <div class="quick-step"><span class="step-badge">7</span>Do mechanical jobs (shuffling, counting, formatting) with a tool or spreadsheet, not the prompt.</div>
+            <div class="quick-step"><span class="step-badge">8</span>Keep the prompt, the date, the model and your checklist results together, and have a person sign off the output.</div>
+        </div>
+    </section>
+
+    <!-- SETUP -->
+    <section id="setup" class="section-card">
+        <div class="section-header">
+            <div class="eyebrow">Setup</div>
+            <h2>Download, serve, run</h2>
+            <p>This section is for people who want to run the code. If you only want the ideas, skip to <a href="#lessons">the lessons</a>. Setup takes about 20 minutes. You need a terminal, git, Python 3.11 or later and about 6 GB of disk space. A graphics card helps but is not required.</p>
+        </div>
+        <div class="quick-start">
+            <div class="quick-step"><span class="step-badge">1</span>Install llama.cpp</div>
+            <div class="quick-step"><span class="step-badge">2</span>Download the Gemma model</div>
+            <div class="quick-step"><span class="step-badge">3</span>Start the model server</div>
+            <div class="quick-step"><span class="step-badge">4</span>Install DSPy and run</div>
+        </div>
+
+        <h3>1. Install llama.cpp</h3>
+        <p><a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a> runs open AI models on an ordinary computer. Other programs can then talk to the model in the same way they talk to OpenAI&rsquo;s online service (an &ldquo;OpenAI-compatible API&rdquo;).</p>
+        <div class="tab-bar" role="tablist" aria-label="Operating system">
+            <button class="tab-btn active" id="btn-mac" data-tab="mac" role="tab" aria-selected="true" aria-controls="tab-mac">macOS</button>
+            <button class="tab-btn" id="btn-win" data-tab="win" role="tab" aria-selected="false" aria-controls="tab-win" tabindex="-1">Windows</button>
+            <button class="tab-btn" id="btn-linux" data-tab="linux" role="tab" aria-selected="false" aria-controls="tab-linux" tabindex="-1">Linux</button>
+        </div>
+        <div id="tab-mac" class="tab-panel active" role="tabpanel" aria-labelledby="btn-mac" tabindex="0">
+<pre class="code"><code>brew install llama.cpp
+llama-server --version</code></pre>
+            <p class="muted">Apple Silicon Macs use the GPU automatically.</p>
+        </div>
+        <div id="tab-win" class="tab-panel" role="tabpanel" aria-labelledby="btn-win" tabindex="0">
+<pre class="code"><code>winget install ggml.llamacpp
+llama-server --version</code></pre>
+            <p class="muted">Open a new terminal after installing so <code>llama-server</code> is on your PATH. Prebuilt downloads for CUDA and Vulkan are also on the <a href="https://github.com/ggml-org/llama.cpp/releases">releases page</a>.</p>
+        </div>
+        <div id="tab-linux" class="tab-panel" role="tabpanel" aria-labelledby="btn-linux" tabindex="0">
+            <p>Build from source. Drop <code>-DGGML_CUDA=ON</code> if you have no NVIDIA card.</p>
+<pre class="code"><code>git clone --depth 1 https://github.com/ggml-org/llama.cpp.git ~/src/llama.cpp
+cd ~/src/llama.cpp
+cmake -B build -DGGML_CUDA=ON
+cmake --build build --config Release -j --target llama-server
+./build/bin/llama-server --version</code></pre>
+            <p class="muted">Needs <code>cmake</code> and a C++ compiler (<code>sudo apt install cmake build-essential</code>), plus the CUDA toolkit for GPU builds.</p>
+        </div>
+
+        <h3>2. Download Gemma 4 E2B</h3>
+        <p>Gemma 4 E2B is the smallest model in Google's Gemma 4 family. It is built for laptops and phones. &ldquo;E2B&rdquo; stands for &ldquo;effective 2 billion&rdquo; parameters (the numbers the model learned in training). The model comes as a GGUF file, the file format llama.cpp reads.</p>
+<pre class="code"><code>pip install -U huggingface_hub
+hf download ggml-org/gemma-4-E2B-it-GGUF gemma-4-E2B-it-Q8_0.gguf</code></pre>
+        <p class="muted">Q8_0 is 5.0 GB. On a laptop with 8 GB of RAM, download <code>gemma-4-E2B-it-Q4_0.gguf</code> instead and point <code>MODEL=</code> at it in step 3.</p>
+
+        <h3>3. Start the model server</h3>
+<pre class="code"><code>git clone https://github.com/wmgmm/ai_governance.git
+cd ai_governance/prompt_evaluation
+./scripts/start_server.sh</code></pre>
+        <p>The script finds the model you downloaded (in your Hugging Face cache). It makes the model available at <code>http://localhost:8090</code>, an address on your own computer. Leave it running. Open a second terminal window and check it is working:</p>
+<pre class="code"><code>curl http://localhost:8090/health</code></pre>
+        <p class="muted">A reply containing <code>"ok"</code> means the server is ready. If it says the model is still loading, wait a few seconds and try again.</p>
+        <div class="callout">
+            <strong>Two settings worth knowing</strong>
+            <div class="callout-body"><code>--reasoning off</code>: by default, Gemma 4 &ldquo;thinks&rdquo; before it answers. For a five-word answer it used 269 tokens with thinking and 13 without (a token is a word or part of a word). For short answers in a fixed format, thinking mostly just costs time.<br><code>--parallel 4</code>: the server handles four requests at a time, so DSPy can test four examples at once.</div>
+        </div>
+        <p class="muted">On Windows, run the command inside the script directly: <code>llama-server -m PATH\to\gemma-4-E2B-it-Q8_0.gguf --alias gemma-4-e2b --port 8090 -c 16384 --parallel 4 -ngl 99 --jinja --reasoning off</code></p>
+
+        <h3>4. Install DSPy and run the experiments</h3>
+        <p>The project uses <a href="https://docs.astral.sh/uv/">uv</a>, a tool that installs Python packages. It installs DSPy 3.4 in a separate space (an &ldquo;environment&rdquo;), so it does not clash with other Python software on your computer.</p>
+<pre class="code"><code>cd ai_governance/prompt_evaluation
+pip install uv
+uv sync
+uv run python run.py all
+uv run python make_results_page.py</code></pre>
+        <p class="muted"><code>run.py all</code> takes about three minutes on a desktop GPU. It writes scores, prompts and every model output to <code>results/</code>, and the second command rebuilds the results section of this page from them. Expect your scores to differ from these by a few points. The model picks each word with some randomness, so no two runs are the same.</p>
+        <p class="muted">Success looks like one line per stage and task, such as <code>baseline short_answer dev score 76.7</code>, then a <code>results/</code> folder full of JSON files. <code>make_results_page.py</code> rewrites your local copy of this page, <code>site/prompt_evaluation/index.html</code>, not the published one.</p>
+
+        <details>
+            <summary><span>If something goes wrong</span></summary>
+            <div class="details-content">
+                <p><strong>&ldquo;Model not found&rdquo;</strong>: the download in step 2 did not finish, or you downloaded a different file. For the smaller Q4_0 file, give its path: <code>MODEL=/path/to/gemma-4-E2B-it-Q4_0.gguf ./scripts/start_server.sh</code>.</p>
+                <p><strong>Port 8090 already in use</strong>: start on another port and tell the scripts where it is: <code>PORT=8091 ./scripts/start_server.sh</code>, then in the second terminal <code>export LLM_API_BASE=http://localhost:8091/v1</code> before <code>uv run</code>.</p>
+                <p><strong><code>hf</code> or <code>llama-server</code> not found</strong>: open a new terminal so the install is on your PATH. On Linux, set <code>LLAMA_SERVER=~/src/llama.cpp/build/bin/llama-server</code> if you built it elsewhere.</p>
+                <p><strong>No graphics card</strong>: everything still works on the CPU, only more slowly. The three-minute figure is for a desktop GPU; CPU times were not measured.</p>
+                <p><strong>Scores differ from this page</strong>: expected, by a few points. See lesson 07.</p>
+            </div>
+        </details>
+    </section>
+
+    <footer>
+        <p>Dr Matt Mort &middot; Cardiff University &middot; Materials &copy; 2026</p>
+        <p><a href="https://github.com/wmgmm/ai_governance">Source on GitHub</a> &middot; <a href="https://wmgmm.github.io/thematts/workshop.html">The Matts workshop</a></p>
+        <p>Text and code licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: reuse and adapt with credit to &ldquo;Matt Mort, Cardiff University&rdquo;.</p>
+    </footer>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

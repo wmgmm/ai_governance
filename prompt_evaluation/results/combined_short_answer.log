@@ -1,0 +1,128 @@
+'requires_permission_to_run' is deprecated and will be removed in a future version.
+
+RUNNING WITH THE FOLLOWING LIGHT AUTO RUN SETTINGS:
+num_trials: 10
+minibatch: False
+num_fewshot_candidates: 6
+num_instruct_candidates: 3
+valset size: 9
+
+
+==> STEP 1: BOOTSTRAP FEWSHOT EXAMPLES <==
+These will be used as few-shot example candidates for our program and for creating instructions.
+
+Bootstrapping N=6 sets of demonstrations...
+
+==> STEP 2: PROPOSE INSTRUCTION CANDIDATES <==
+We will use the few-shot examples from the previous step, a generated dataset summary, a summary of the program code, and a randomly selected prompting tip to propose instructions.
+
+Proposing N=3 instructions...
+
+Proposed Instructions for Predictor 0:
+
+0: Write one exam question about the passage, with its answer.
+Rules:
+- Students will not see the passage, so never mention "the passage" or "the text".
+- The question must end with a question mark.
+- The answer must be 12 words or fewer, taken from the passage's own ideas.
+- Do not repeat the question's words in the answer.
+
+1: You are an expert exam question generator for AI ethics. Your task is to create one challenging multiple-choice question and its corresponding correct answer based *only* on the provided text. Imagine you are preparing a high-stakes certification exam.
+
+Instructions:
+1. Create a single question that tests a specific concept from the passage.
+2. Provide the correct answer that is directly supported by the text.
+3. Ensure the question is phrased naturally and ends with a question mark.
+4. The provided answer must be concise, ideally 12 words or fewer, and strictly derived from the passage's content.
+5. Crucially, you must *never* mention "the passage" or "the text" in the question.
+6. The answer must not repeat words from the question.
+
+Passage: Transparency means people are told when they are interacting with an AI system or when AI has contributed to a decision about them. It also covers explaining, in plain language, what the system does, what data it uses and what its limits are. Transparency supports trust, because people can only question what they know about.
+
+Question: What specific elements define transparency concerning an AI system?
+Answer: Explaining what the system does, data used, and its limits.
+
+2: Based on the provided text about AI ethics concepts, generate one exam question and its corresponding answer pair. Ensure the question requires extracting specific information, the answer is concise (12 words or fewer), and the answer is derived strictly from the text without repeating words from the question.
+
+
+
+==> STEP 3: FINDING OPTIMAL PROMPT PARAMETERS <==
+We will evaluate the program over a series of trials with different combinations of instructions and few-shot examples to find the optimal combination using Bayesian Optimization.
+
+== Trial 1 / 10 - Full Evaluation of Default Program ==
+Default program score: 93.33
+
+===== Trial 2 / 10 =====
+Score: 91.11 with parameters ['Predictor 0: Instruction 1', 'Predictor 0: Few-Shot Set 1'].
+Scores so far: [93.33, 91.11]
+Best score so far: 93.33
+========================
+
+
+===== Trial 3 / 10 =====
+[92mBest full score so far![0m Score: 95.56
+Score: 95.56 with parameters ['Predictor 0: Instruction 2', 'Predictor 0: Few-Shot Set 3'].
+Scores so far: [93.33, 91.11, 95.56]
+Best score so far: 95.56
+========================
+
+
+===== Trial 4 / 10 =====
+Score: 93.33 with parameters ['Predictor 0: Instruction 0', 'Predictor 0: Few-Shot Set 0'].
+Scores so far: [93.33, 91.11, 95.56, 93.33]
+Best score so far: 95.56
+========================
+
+
+===== Trial 5 / 10 =====
+[92mBest full score so far![0m Score: 97.78
+Score: 97.78 with parameters ['Predictor 0: Instruction 0', 'Predictor 0: Few-Shot Set 5'].
+Scores so far: [93.33, 91.11, 95.56, 93.33, 97.78]
+Best score so far: 97.78
+========================
+
+
+===== Trial 6 / 10 =====
+Score: 95.56 with parameters ['Predictor 0: Instruction 0', 'Predictor 0: Few-Shot Set 3'].
+Scores so far: [93.33, 91.11, 95.56, 93.33, 97.78, 95.56]
+Best score so far: 97.78
+========================
+
+
+===== Trial 7 / 10 =====
+[92mBest full score so far![0m Score: 100.0
+Score: 100.0 with parameters ['Predictor 0: Instruction 2', 'Predictor 0: Few-Shot Set 1'].
+Scores so far: [93.33, 91.11, 95.56, 93.33, 97.78, 95.56, 100.0]
+Best score so far: 100.0
+========================
+
+
+===== Trial 8 / 10 =====
+Score: 95.56 with parameters ['Predictor 0: Instruction 0', 'Predictor 0: Few-Shot Set 3'].
+Scores so far: [93.33, 91.11, 95.56, 93.33, 97.78, 95.56, 100.0, 95.56]
+Best score so far: 100.0
+========================
+
+
+===== Trial 9 / 10 =====
+Score: 93.33 with parameters ['Predictor 0: Instruction 1', 'Predictor 0: Few-Shot Set 0'].
+Scores so far: [93.33, 91.11, 95.56, 93.33, 97.78, 95.56, 100.0, 95.56, 93.33]
+Best score so far: 100.0
+========================
+
+
+===== Trial 10 / 10 =====
+Score: 93.33 with parameters ['Predictor 0: Instruction 2', 'Predictor 0: Few-Shot Set 0'].
+Scores so far: [93.33, 91.11, 95.56, 93.33, 97.78, 95.56, 100.0, 95.56, 93.33, 93.33]
+Best score so far: 100.0
+=========================
+
+
+===== Trial 11 / 10 =====
+Score: 100.0 with parameters ['Predictor 0: Instruction 2', 'Predictor 0: Few-Shot Set 1'].
+Scores so far: [93.33, 91.11, 95.56, 93.33, 97.78, 95.56, 100.0, 95.56, 93.33, 93.33, 100.0]
+Best score so far: 100.0
+=========================
+
+
+Returning best identified program with score 100.0!

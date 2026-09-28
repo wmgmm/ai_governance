@@ -1,0 +1,70 @@
+{
+  "traces": [],
+  "train": [],
+  "demos": [
+    {
+      "augmented": true,
+      "passage": "A risk-based approach scales controls to the potential for harm. A tool that suggests email subject lines needs light checks, while a system that influences access to healthcare, employment or education needs thorough testing, documentation and oversight. Assessing risk means considering who could be affected, how severely, and how easily a mistake could be noticed and reversed.",
+      "question": "What is the core principle of a risk-based approach to controls?",
+      "options": [
+        "Applying the same level of scrutiny to all AI systems regardless of their impact",
+        "Scaling controls based on the potential for harm",
+        "Only implementing controls when a system fails its initial testing",
+        "Focusing solely on the ease of noticing a mistake"
+      ],
+      "answer_index": 1
+    },
+    {
+      "augmented": true,
+      "passage": "An AI system's performance can drift after deployment as the world changes, for example when the people using a service change or when new kinds of cases appear. Monitoring tracks key measures over time and compares them with the levels seen in testing, so that a decline is noticed and acted on.",
+      "question": "What is the purpose of monitoring an AI system's key measures over time?",
+      "options": [
+        "To ensure the system is always operating at peak performance",
+        "To compare current performance with testing levels to detect declines",
+        "To replace the system if performance drops below a certain threshold",
+        "To document every interaction the system has with users"
+      ],
+      "answer_index": 1
+    },
+    {
+      "passage": "Human oversight means a competent person can monitor an AI system, understand its outputs, and intervene or override it when needed. Oversight only works if the person has the time, training and authority to disagree with the system. A human who simply approves every output without scrutiny provides the appearance of oversight but not the substance.",
+      "question": "Which situation provides only the appearance of human oversight?",
+      "options": [
+        "A trained reviewer who can override the system",
+        "A reviewer with authority to pause the system",
+        "A reviewer who approves every output without scrutiny",
+        "A reviewer who monitors outputs and intervenes"
+      ],
+      "answer_index": 2
+    }
+  ],
+  "signature": {
+    "instructions": "Write one multiple-choice exam question about the passage.",
+    "fields": [
+      {
+        "prefix": "Passage:",
+        "description": "${passage}"
+      },
+      {
+        "prefix": "Question:",
+        "description": "${question}"
+      },
+      {
+        "prefix": "Options:",
+        "description": "${options}"
+      },
+      {
+        "prefix": "Answer Index:",
+        "description": "${answer_index}"
+      }
+    ]
+  },
+  "lm": null,
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.13",
+      "dspy": "3.4.0",
+      "cloudpickle": "3.1"
+    }
+  }
+}

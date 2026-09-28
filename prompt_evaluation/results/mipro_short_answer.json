@@ -1,0 +1,203 @@
+{
+  "stage": "mipro",
+  "task": "short_answer",
+  "seed": 7,
+  "n_train": 12,
+  "n_dev": 12,
+  "dspy_version": "3.4.0",
+  "prompt": {
+    "instructions": "Write one exam question, answerable from the passage, with its short answer.",
+    "demos": []
+  },
+  "score": 76.7,
+  "pass_rates": {
+    "is_a_question": 1.0,
+    "stands_alone": 0.8333333333333334,
+    "answer_is_short": 0.0,
+    "answer_grounded": 1.0,
+    "answer_not_leaked": 1.0
+  },
+  "examples": [
+    {
+      "passage": "When several teams contribute to an AI system, accountability can become blurred. A common remedy is a responsibility matrix that states who builds, who approves, who operates and who monitors the system. Without such clarity, problems fall between teams and nobody acts. Clear accountability also makes it easier for affected people to know whom to contact.",
+      "output": {
+        "question": "What is a common remedy for blurred accountability when several teams contribute to an AI system?",
+        "answer": "A common remedy is a responsibility matrix that specifies who builds, approves, operates, and monitors the system."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Good explanations are pitched at the audience. A technical team may need details of the model and its training data, while a member of the public needs to know what the system decided, the main reasons, and how to challenge it. An explanation that is accurate but incomprehensible to its reader does not deliver transparency.",
+      "output": {
+        "question": "What is the purpose of pitching good explanations to an audience, and what does an explanation that is accurate but incomprehensible to its reader fail to deliver?",
+        "answer": "Good explanations are pitched at the audience; a technical team may need details of the model and its training data, while the public needs to know what the system decided, the main reasons, and how to challenge it. An explanation that is accurate but incomprehensible to its reader does not deliver transparency."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Automation bias is the tendency to over-trust a system's suggestions, even when other evidence points the other way. It weakens human oversight. Ways to reduce it include showing the system's confidence, asking reviewers to form their own view before seeing the output, and regularly checking a sample of decisions where the reviewer agreed with the system.",
+      "output": {
+        "question": "What is automation bias, and what are some ways to reduce it?",
+        "answer": "Automation bias is the tendency to over-trust a system's suggestions, even when other evidence suggests otherwise, which weakens human oversight. Ways to reduce it include showing the system's confidence, asking reviewers to form their own view before seeing the output, and regularly checking a sample of decisions where the reviewer agreed with the system."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Risk is not fixed when a system is approved. A system used for a new purpose, on a new population, or with a new data source may carry different risks from the ones originally assessed. For this reason, a change in use should trigger a fresh risk assessment rather than relying on the approval given for the original purpose.",
+      "output": {
+        "question": "What should trigger a fresh risk assessment when a system is used for a new purpose, on a new population, or with a new data source?",
+        "answer": "A change in use should trigger a fresh risk assessment rather than relying on the approval given for the original purpose."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Pasting personal or confidential information into a general-purpose AI chat tool can send it to a third party, where it may be stored or used in ways the organisation does not control. A simple safeguard is to remove names and identifying details before sharing text, and to use tools the organisation has approved for the sensitivity of the data.",
+      "output": {
+        "question": "What is a simple safeguard recommended for pasting personal or confidential information into a general-purpose AI chat tool?",
+        "answer": "A simple safeguard is to remove names and identifying details before sharing text, and to use tools that the organization has approved for the sensitivity of the data."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Bias can enter an AI system through historical data that reflects past unfairness, through labels chosen by people, or through a target that is only a proxy for what matters. For example, using past spending as a proxy for need can disadvantage groups who had less access to a service. Choosing the target carefully is as important as choosing the model.",
+      "output": {
+        "question": "What are the three ways bias can enter an AI system, according to the passage?",
+        "answer": "Bias can enter an AI system through historical data that reflects past unfairness, through labels chosen by people, or through a target that is only a proxy for what matters."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": false,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.6
+    },
+    {
+      "passage": "Documentation goes out of date when a system changes. A useful habit is to version the documentation alongside the model, so each release has a matching record of its data, tests and limitations. When documentation and the running system disagree, the documentation stops being evidence and becomes a source of false confidence.",
+      "output": {
+        "question": "What is a useful habit for managing documentation when a system changes?",
+        "answer": "A useful habit is to version the documentation alongside the model so that each release has a matching record of its data, tests, and limitations."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Near misses are worth recording even when no harm occurred. They show where controls are weak before a real failure happens. Organisations that only record actual harms tend to learn late, while those that encourage staff to report near misses without fear of blame build an early warning system.",
+      "output": {
+        "question": "Why are near misses important to record for organizations?",
+        "answer": "Near misses are important to record because they show where controls are weak before a real failure occurs, allowing organizations to build an early warning system rather than learning late from actual harms."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Suppliers often update the models behind their products without notice, which can change behaviour that an organisation relied on. Contracts can require advance notice of material changes, and organisations can keep a small set of test cases to rerun after each update to check that important behaviour has not shifted.",
+      "output": {
+        "question": "What can organizations do to check if important behavior has shifted after a supplier updates the models behind their products without notice?",
+        "answer": "Organizations can keep a small set of test cases to rerun after each update to check that important behavior has not shifted."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Records themselves carry risk, because logs of inputs and outputs may contain personal data. Good practice is to decide in advance what to log, who can access the logs, and how long they are kept. Records should be kept long enough to be useful and no longer than necessary.",
+      "output": {
+        "question": "What are the key considerations for managing records that contain personal data?",
+        "answer": "Good practice involves deciding in advance what to log, who can access the logs, and how long they are kept. Records should be retained only as long as they are useful and no longer than necessary."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Challenges to AI decisions are also a source of learning. If many people contest the same kind of decision, that pattern may reveal a flaw in the system or its data. Tracking the number and outcome of challenges turns individual complaints into evidence about how well the system works.",
+      "output": {
+        "question": "How can contesting the same kind of decision by many people be beneficial for improving an AI system?",
+        "answer": "If many people contest the same kind of decision, that pattern may reveal a flaw in the system or its data, and tracking the number and outcome of challenges turns individual complaints into evidence about how well the system works."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.8
+    },
+    {
+      "passage": "Monitoring is only useful if someone acts on it. Each measure should have a threshold that triggers a response, such as a review, retraining or pausing the system, and a named person who receives the alert. A dashboard that nobody watches gives the organisation false reassurance.",
+      "output": {
+        "question": "What are the key components that make monitoring useful, according to the passage?",
+        "answer": "Monitoring is only useful if someone acts on it. Each measure should have a threshold that triggers a response (such as a review, retraining, or pausing the system), and a named person who receives the alert."
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": false,
+        "answer_is_short": false,
+        "answer_grounded": true,
+        "answer_not_leaked": true
+      },
+      "score": 0.6
+    }
+  ],
+  "seconds": 24
+}

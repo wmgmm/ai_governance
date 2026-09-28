@@ -1,0 +1,68 @@
+{
+  "traces": [],
+  "train": [],
+  "demos": [
+    {
+      "passage": "Transparency means people are told when they are interacting with an AI system or when AI has contributed to a decision about them. It also covers explaining, in plain language, what the system does, what data it uses and what its limits are. Transparency supports trust, because people can only question what they know about.",
+      "question": "Which of these is part of transparency about an AI system?",
+      "options": [
+        "Keeping the use of AI confidential from the people affected",
+        "Telling people when AI has contributed to a decision about them",
+        "Publishing the model's full source code in every case",
+        "Removing human staff from the decision-making process"
+      ],
+      "answer_index": 1
+    },
+    {
+      "passage": "Human oversight means a competent person can monitor an AI system, understand its outputs, and intervene or override it when needed. Oversight only works if the person has the time, training and authority to disagree with the system. A human who simply approves every output without scrutiny provides the appearance of oversight but not the substance.",
+      "question": "Which situation provides only the appearance of human oversight?",
+      "options": [
+        "A trained reviewer who can override the system",
+        "A reviewer with authority to pause the system",
+        "A reviewer who approves every output without scrutiny",
+        "A reviewer who monitors outputs and intervenes"
+      ],
+      "answer_index": 2
+    },
+    {
+      "passage": "Accountability means a named person or role is answerable for how an AI system is used and for its outcomes. It cannot be handed to the system itself or to the supplier who built it. Organisations usually record an accountable owner for each system, who approves its use, signs off changes, and answers questions when something goes wrong.",
+      "question": "Which statement best describes accountability for an AI system?",
+      "options": [
+        "A named person or role is answerable for its use and outcomes",
+        "The supplier who built the system remains answerable for it",
+        "The system itself is answerable for the decisions it makes",
+        "No one is answerable once the system has passed its tests"
+      ],
+      "answer_index": 0
+    }
+  ],
+  "signature": {
+    "instructions": "Based on the provided text, generate one multiple-choice question about the main concept discussed. The question should test comprehension of the key idea. Provide exactly four options: one correct answer and three incorrect but plausible distractors. Ensure all options are of similar length and written in your own words. Finally, provide the 0-based index of the correct option.",
+    "fields": [
+      {
+        "prefix": "Passage:",
+        "description": "${passage}"
+      },
+      {
+        "prefix": "Question:",
+        "description": "${question}"
+      },
+      {
+        "prefix": "Options:",
+        "description": "${options}"
+      },
+      {
+        "prefix": "Answer Index:",
+        "description": "${answer_index}"
+      }
+    ]
+  },
+  "lm": null,
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.13",
+      "dspy": "3.4.0",
+      "cloudpickle": "3.1"
+    }
+  }
+}

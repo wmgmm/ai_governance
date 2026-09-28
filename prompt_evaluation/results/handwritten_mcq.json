@@ -1,0 +1,320 @@
+{
+  "stage": "handwritten",
+  "task": "mcq",
+  "seed": 7,
+  "n_train": 12,
+  "n_dev": 12,
+  "dspy_version": "3.4.0",
+  "prompt": {
+    "instructions": "Write one multiple-choice exam question about the passage.\nRules:\n- Students will not see the passage, so never mention \"the passage\" or \"the text\".\n- Give exactly four options: one correct, three plausible but wrong.\n- Keep all four options about the same length, so the answer does not stand out.\n- Write the wrong options in your own words, not copied from the passage.\n- answer_index is the 0-based position of the correct option.",
+    "demos": []
+  },
+  "score": 89.6,
+  "pass_rates": {
+    "is_a_question": 1.0,
+    "stands_alone": 0.8333333333333334,
+    "four_options": 1.0,
+    "options_distinct": 1.0,
+    "index_valid": 1.0,
+    "correct_grounded": 0.5,
+    "distractors_not_copied": 1.0,
+    "no_length_giveaway": 0.8333333333333334
+  },
+  "examples": [
+    {
+      "passage": "When several teams contribute to an AI system, accountability can become blurred. A common remedy is a responsibility matrix that states who builds, who approves, who operates and who monitors the system. Without such clarity, problems fall between teams and nobody acts. Clear accountability also makes it easier for affected people to know whom to contact.",
+      "output": {
+        "question": "What is suggested as a common solution to the issue of blurred accountability when multiple teams work on an AI system?",
+        "options": [
+          "Implementing stricter coding standards for all contributing developers.",
+          "Establishing a formal process for feature prioritization among the teams.",
+          "Creating a responsibility matrix detailing roles for building, approving, operating, and monitoring.",
+          "Increasing the frequency of cross-team meetings to discuss potential issues immediately."
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Good explanations are pitched at the audience. A technical team may need details of the model and its training data, while a member of the public needs to know what the system decided, the main reasons, and how to challenge it. An explanation that is accurate but incomprehensible to its reader does not deliver transparency.",
+      "output": {
+        "question": "What is the primary goal of providing explanations for a system to different audiences?",
+        "options": [
+          "To ensure that all technical details of the model and training data are fully disclosed.",
+          "To make sure that the information provided is technically precise, regardless of the reader's background.",
+          "To deliver transparency by tailoring the explanation to what the specific audience needs to understand.",
+          "To limit the scope of information shared to only what is necessary for the development team."
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 1.0
+    },
+    {
+      "passage": "Automation bias is the tendency to over-trust a system's suggestions, even when other evidence points the other way. It weakens human oversight. Ways to reduce it include showing the system's confidence, asking reviewers to form their own view before seeing the output, and regularly checking a sample of decisions where the reviewer agreed with the system.",
+      "output": {
+        "question": "What is the primary characteristic of automation bias described in the passage?",
+        "options": [
+          "The tendency to rely solely on automated suggestions without any human input.",
+          "A situation where human oversight is completely eliminated by the system.",
+          "Over-trusting a system's recommendations despite contradictory evidence.",
+          "The regular process of verifying all system outputs before human review."
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": false,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Risk is not fixed when a system is approved. A system used for a new purpose, on a new population, or with a new data source may carry different risks from the ones originally assessed. For this reason, a change in use should trigger a fresh risk assessment rather than relying on the approval given for the original purpose.",
+      "output": {
+        "question": "What action should be taken if a system is changed to serve a new purpose, population, or data source?",
+        "options": [
+          "Rely on the initial approval since the core system components remain unchanged.",
+          "Conduct a complete risk assessment because changes in application context introduce new risks.",
+          "Ignore the previous assessment as the original risk profile is sufficient for the new scenario.",
+          "Only perform a minor review if the change involves only a small update to the system's interface."
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": false,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Pasting personal or confidential information into a general-purpose AI chat tool can send it to a third party, where it may be stored or used in ways the organisation does not control. A simple safeguard is to remove names and identifying details before sharing text, and to use tools the organisation has approved for the sensitivity of the data.",
+      "output": {
+        "question": "What is a recommended initial step to protect personal or confidential information when using a general-purpose AI chat tool?",
+        "options": [
+          "Use only tools that have been explicitly approved by the organization for handling sensitive data.",
+          "Ensure that all shared content is thoroughly reviewed by a team member before submission.",
+          "Remove all names and specific identifying details from the text before sharing it.",
+          "Limit the amount of confidential information shared in any single interaction to prevent exposure."
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 1.0
+    },
+    {
+      "passage": "Bias can enter an AI system through historical data that reflects past unfairness, through labels chosen by people, or through a target that is only a proxy for what matters. For example, using past spending as a proxy for need can disadvantage groups who had less access to a service. Choosing the target carefully is as important as choosing the model.",
+      "output": {
+        "question": "What are the primary ways bias can be introduced into an AI system, according to the provided information?",
+        "options": [
+          "By selecting an inappropriate mathematical model during the development phase.",
+          "Through the selection of a target variable that does not accurately represent the true outcome.",
+          "Via historical data that contains reflections of past societal unfairness.",
+          "By using labels that are arbitrarily assigned by developers during training."
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": false,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Documentation goes out of date when a system changes. A useful habit is to version the documentation alongside the model, so each release has a matching record of its data, tests and limitations. When documentation and the running system disagree, the documentation stops being evidence and becomes a source of false confidence.",
+      "output": {
+        "question": "What is a recommended practice to maintain accurate documentation when a system undergoes changes?",
+        "options": [
+          "Update the documentation only after the system has been fully deployed and tested.",
+          "Keep the documentation separate from the model to allow for easier updates.",
+          "Version the documentation in tandem with the model to ensure alignment.",
+          "Ignore discrepancies between the documentation and the running system for simplicity."
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 1.0
+    },
+    {
+      "passage": "Near misses are worth recording even when no harm occurred. They show where controls are weak before a real failure happens. Organisations that only record actual harms tend to learn late, while those that encourage staff to report near misses without fear of blame build an early warning system.",
+      "output": {
+        "question": "What is the primary benefit of recording near misses, even when no actual harm has occurred?",
+        "options": [
+          "It ensures that only serious incidents are documented for organizational review.",
+          "It helps in identifying weaknesses in safety controls before a major accident occurs.",
+          "It serves as a formal punishment mechanism for staff who deviate from procedures.",
+          "It primarily documents the exact sequence of events leading to a successful outcome."
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": false,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Suppliers often update the models behind their products without notice, which can change behaviour that an organisation relied on. Contracts can require advance notice of material changes, and organisations can keep a small set of test cases to rerun after each update to check that important behaviour has not shifted.",
+      "output": {
+        "question": "What is a proactive measure organizations can take to mitigate the impact of unannounced model updates from suppliers?",
+        "options": [
+          "Negotiate stricter clauses in contracts to demand notification before any product changes are implemented.",
+          "Maintain a comprehensive library of testing scenarios to verify critical functions after every update.",
+          "Immediately discontinue using any product that receives an unexpected software modification.",
+          "Focus solely on internal system monitoring to detect behavioral shifts after an update occurs."
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": false,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Records themselves carry risk, because logs of inputs and outputs may contain personal data. Good practice is to decide in advance what to log, who can access the logs, and how long they are kept. Records should be kept long enough to be useful and no longer than necessary.",
+      "output": {
+        "question": "What are key considerations for managing records that contain personal data?",
+        "options": [
+          "Ensuring logs are stored on the fastest available server for immediate access",
+          "Determining the precise format of the data before logging it",
+          "Establishing clear policies on what data to record, who can view it, and retention periods",
+          "Archiving all logs indefinitely to ensure complete historical traceability"
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": false,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.75
+    },
+    {
+      "passage": "Challenges to AI decisions are also a source of learning. If many people contest the same kind of decision, that pattern may reveal a flaw in the system or its data. Tracking the number and outcome of challenges turns individual complaints into evidence about how well the system works.",
+      "output": {
+        "question": "How can challenges to AI decisions contribute to learning processes?",
+        "options": [
+          "By increasing the volume of data used to train the AI model more effectively.",
+          "By providing direct feedback that helps identify weaknesses or errors in the system or its underlying data.",
+          "By automatically updating the AI system to correct the contested decisions immediately.",
+          "By solely serving as a mechanism to filter out unfair or biased outcomes from the decision-making process."
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": false,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Monitoring is only useful if someone acts on it. Each measure should have a threshold that triggers a response, such as a review, retraining or pausing the system, and a named person who receives the alert. A dashboard that nobody watches gives the organisation false reassurance.",
+      "output": {
+        "question": "What is a critical component for monitoring to be effective?",
+        "options": [
+          "Having a complex dashboard that displays many metrics for easy viewing",
+          "Establishing a system where alerts are sent to a designated individual",
+          "Creating numerous statistical measurements without setting response triggers",
+          "Ensuring that the monitoring system provides constant reassurance to staff"
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": false,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 0.875
+    }
+  ],
+  "answer_positions": {
+    "A": 0,
+    "B": 5,
+    "C": 7,
+    "D": 0
+  },
+  "seconds": 4
+}

@@ -1,0 +1,46 @@
+{
+  "traces": [],
+  "train": [],
+  "demos": [
+    {
+      "passage": "Transparency means people are told when they are interacting with an AI system or when AI has contributed to a decision about them. It also covers explaining, in plain language, what the system does, what data it uses and what its limits are. Transparency supports trust, because people can only question what they know about.",
+      "question": "Why does transparency support trust in AI systems?",
+      "answer": "Because people can only question what they know about"
+    },
+    {
+      "passage": "Human oversight means a competent person can monitor an AI system, understand its outputs, and intervene or override it when needed. Oversight only works if the person has the time, training and authority to disagree with the system. A human who simply approves every output without scrutiny provides the appearance of oversight but not the substance.",
+      "question": "What three things does a person need for human oversight to work?",
+      "answer": "Time, training and authority to disagree with the system"
+    },
+    {
+      "passage": "Accountability means a named person or role is answerable for how an AI system is used and for its outcomes. It cannot be handed to the system itself or to the supplier who built it. Organisations usually record an accountable owner for each system, who approves its use, signs off changes, and answers questions when something goes wrong.",
+      "question": "Who remains answerable for the outcomes of an AI system that an organisation uses?",
+      "answer": "A named accountable owner within the organisation"
+    }
+  ],
+  "signature": {
+    "instructions": "Based on the provided text about AI ethics concepts, generate one exam question and its corresponding answer pair. Ensure the question requires extracting specific information, the answer is concise (12 words or fewer), and the answer is derived strictly from the text without repeating words from the question.",
+    "fields": [
+      {
+        "prefix": "Passage:",
+        "description": "${passage}"
+      },
+      {
+        "prefix": "Question:",
+        "description": "${question}"
+      },
+      {
+        "prefix": "Answer:",
+        "description": "${answer}"
+      }
+    ]
+  },
+  "lm": null,
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.13",
+      "dspy": "3.4.0",
+      "cloudpickle": "3.1"
+    }
+  }
+}

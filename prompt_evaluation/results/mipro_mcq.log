@@ -1,0 +1,107 @@
+'requires_permission_to_run' is deprecated and will be removed in a future version.
+
+RUNNING WITH THE FOLLOWING LIGHT AUTO RUN SETTINGS:
+num_trials: 10
+minibatch: False
+num_fewshot_candidates: 6
+num_instruct_candidates: 3
+valset size: 9
+
+
+==> STEP 1: BOOTSTRAP FEWSHOT EXAMPLES <==
+These will be used as few-shot example candidates for our program and for creating instructions.
+
+Bootstrapping N=6 sets of demonstrations...
+
+==> STEP 2: PROPOSE INSTRUCTION CANDIDATES <==
+We will use the few-shot examples from the previous step, a generated dataset summary, a summary of the program code, and a randomly selected prompting tip to propose instructions.
+
+Proposing N=3 instructions...
+
+Proposed Instructions for Predictor 0:
+
+0: Write one multiple-choice exam question about the passage.
+
+1: Based on the provided passage explaining the concept of 'Accountability' in AI systems, generate a challenging multiple-choice question that presents a high-stakes scenario. The question should test the user's understanding of the core concept of accountability. Provide four distinct options, one of which is the correct answer, and specify the index of the correct option.
+
+2: Given a text passage and a set of multiple-choice options, generate a single multiple-choice question based on the passage. The question should test the comprehension of the concepts explained in the passage. Provide the question, the options, and the index of the correct answer.
+
+
+
+==> STEP 3: FINDING OPTIMAL PROMPT PARAMETERS <==
+We will evaluate the program over a series of trials with different combinations of instructions and few-shot examples to find the optimal combination using Bayesian Optimization.
+
+== Trial 1 / 10 - Full Evaluation of Default Program ==
+Default program score: 90.28
+
+===== Trial 2 / 10 =====
+Score: 84.72 with parameters ['Predictor 0: Instruction 1', 'Predictor 0: Few-Shot Set 1'].
+Scores so far: [90.28, 84.72]
+Best score so far: 90.28
+========================
+
+
+===== Trial 3 / 10 =====
+Score: 86.11 with parameters ['Predictor 0: Instruction 2', 'Predictor 0: Few-Shot Set 3'].
+Scores so far: [90.28, 84.72, 86.11]
+Best score so far: 90.28
+========================
+
+
+===== Trial 4 / 10 =====
+Score: 90.28 with parameters ['Predictor 0: Instruction 0', 'Predictor 0: Few-Shot Set 0'].
+Scores so far: [90.28, 84.72, 86.11, 90.28]
+Best score so far: 90.28
+========================
+
+
+===== Trial 5 / 10 =====
+Score: 88.89 with parameters ['Predictor 0: Instruction 0', 'Predictor 0: Few-Shot Set 5'].
+Scores so far: [90.28, 84.72, 86.11, 90.28, 88.89]
+Best score so far: 90.28
+========================
+
+
+===== Trial 6 / 10 =====
+Score: 88.89 with parameters ['Predictor 0: Instruction 0', 'Predictor 0: Few-Shot Set 3'].
+Scores so far: [90.28, 84.72, 86.11, 90.28, 88.89, 88.89]
+Best score so far: 90.28
+========================
+
+
+===== Trial 7 / 10 =====
+Score: 87.5 with parameters ['Predictor 0: Instruction 2', 'Predictor 0: Few-Shot Set 1'].
+Scores so far: [90.28, 84.72, 86.11, 90.28, 88.89, 88.89, 87.5]
+Best score so far: 90.28
+========================
+
+
+===== Trial 8 / 10 =====
+Score: 88.89 with parameters ['Predictor 0: Instruction 0', 'Predictor 0: Few-Shot Set 3'].
+Scores so far: [90.28, 84.72, 86.11, 90.28, 88.89, 88.89, 87.5, 88.89]
+Best score so far: 90.28
+========================
+
+
+===== Trial 9 / 10 =====
+Score: 88.89 with parameters ['Predictor 0: Instruction 1', 'Predictor 0: Few-Shot Set 0'].
+Scores so far: [90.28, 84.72, 86.11, 90.28, 88.89, 88.89, 87.5, 88.89, 88.89]
+Best score so far: 90.28
+========================
+
+
+===== Trial 10 / 10 =====
+Score: 88.89 with parameters ['Predictor 0: Instruction 2', 'Predictor 0: Few-Shot Set 0'].
+Scores so far: [90.28, 84.72, 86.11, 90.28, 88.89, 88.89, 87.5, 88.89, 88.89, 88.89]
+Best score so far: 90.28
+=========================
+
+
+===== Trial 11 / 10 =====
+Score: 88.89 with parameters ['Predictor 0: Instruction 0', 'Predictor 0: Few-Shot Set 2'].
+Scores so far: [90.28, 84.72, 86.11, 90.28, 88.89, 88.89, 87.5, 88.89, 88.89, 88.89, 88.89]
+Best score so far: 90.28
+=========================
+
+
+Returning best identified program with score 90.28!

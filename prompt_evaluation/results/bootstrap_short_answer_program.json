@@ -1,0 +1,46 @@
+{
+  "traces": [],
+  "train": [],
+  "demos": [
+    {
+      "passage": "A risk-based approach scales controls to the potential for harm. A tool that suggests email subject lines needs light checks, while a system that influences access to healthcare, employment or education needs thorough testing, documentation and oversight. Assessing risk means considering who could be affected, how severely, and how easily a mistake could be noticed and reversed.",
+      "question": "In a risk-based approach, what determines how strong the controls on an AI system should be?",
+      "answer": "The potential for harm"
+    },
+    {
+      "passage": "Documentation such as a model card or system card records what an AI system is for, how it was built and tested, its known limitations, and the conditions under which it should not be used. Good documentation lets someone who was not involved in building the system judge whether it is suitable for their purpose.",
+      "question": "What is the main purpose of a model card or system card?",
+      "answer": "So someone not involved can judge whether it is suitable"
+    },
+    {
+      "passage": "Transparency means people are told when they are interacting with an AI system or when AI has contributed to a decision about them. It also covers explaining, in plain language, what the system does, what data it uses and what its limits are. Transparency supports trust, because people can only question what they know about.",
+      "question": "Why does transparency support trust in AI systems?",
+      "answer": "Because people can only question what they know about"
+    }
+  ],
+  "signature": {
+    "instructions": "Write one exam question, answerable from the passage, with its short answer.",
+    "fields": [
+      {
+        "prefix": "Passage:",
+        "description": "${passage}"
+      },
+      {
+        "prefix": "Question:",
+        "description": "${question}"
+      },
+      {
+        "prefix": "Answer:",
+        "description": "${answer}"
+      }
+    ]
+  },
+  "lm": null,
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.13",
+      "dspy": "3.4.0",
+      "cloudpickle": "3.1"
+    }
+  }
+}

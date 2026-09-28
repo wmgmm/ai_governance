@@ -1,0 +1,320 @@
+{
+  "stage": "baseline",
+  "task": "mcq",
+  "seed": 7,
+  "n_train": 12,
+  "n_dev": 12,
+  "dspy_version": "3.4.0",
+  "prompt": {
+    "instructions": "Write one multiple-choice exam question about the passage.",
+    "demos": []
+  },
+  "score": 85.4,
+  "pass_rates": {
+    "is_a_question": 1.0,
+    "stands_alone": 0.6666666666666666,
+    "four_options": 1.0,
+    "options_distinct": 1.0,
+    "index_valid": 1.0,
+    "correct_grounded": 0.9166666666666666,
+    "distractors_not_copied": 0.9166666666666666,
+    "no_length_giveaway": 0.3333333333333333
+  },
+  "examples": [
+    {
+      "passage": "When several teams contribute to an AI system, accountability can become blurred. A common remedy is a responsibility matrix that states who builds, who approves, who operates and who monitors the system. Without such clarity, problems fall between teams and nobody acts. Clear accountability also makes it easier for affected people to know whom to contact.",
+      "output": {
+        "question": "What is a common remedy mentioned for blurring accountability when several teams contribute to an AI system?",
+        "options": [
+          "Implementing stricter coding standards",
+          "Establishing a responsibility matrix",
+          "Increasing the number of contributing teams",
+          "Focusing solely on system performance metrics"
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": false,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Good explanations are pitched at the audience. A technical team may need details of the model and its training data, while a member of the public needs to know what the system decided, the main reasons, and how to challenge it. An explanation that is accurate but incomprehensible to its reader does not deliver transparency.",
+      "output": {
+        "question": "What is the main purpose of tailoring explanations to different audiences?",
+        "options": [
+          "To ensure all explanations are technically accurate.",
+          "To make the explanation as detailed as possible.",
+          "To ensure the explanation is incomprehensible to the reader.",
+          "To deliver transparency by making the explanation accessible to the intended audience."
+        ],
+        "answer_index": 3
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Automation bias is the tendency to over-trust a system's suggestions, even when other evidence points the other way. It weakens human oversight. Ways to reduce it include showing the system's confidence, asking reviewers to form their own view before seeing the output, and regularly checking a sample of decisions where the reviewer agreed with the system.",
+      "output": {
+        "question": "What is automation bias defined as in the passage?",
+        "options": [
+          "The tendency to rely solely on human intuition.",
+          "The tendency to over-trust a system's suggestions even when other evidence suggests otherwise.",
+          "The practice of consistently ignoring system outputs.",
+          "The process of developing new automation tools."
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": false,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.75
+    },
+    {
+      "passage": "Risk is not fixed when a system is approved. A system used for a new purpose, on a new population, or with a new data source may carry different risks from the ones originally assessed. For this reason, a change in use should trigger a fresh risk assessment rather than relying on the approval given for the original purpose.",
+      "output": {
+        "question": "What should trigger a fresh risk assessment when a system's use changes?",
+        "options": [
+          "Relying on the original approval",
+          "A change in use",
+          "The original risk assessment",
+          "A system being approved"
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 1.0
+    },
+    {
+      "passage": "Pasting personal or confidential information into a general-purpose AI chat tool can send it to a third party, where it may be stored or used in ways the organisation does not control. A simple safeguard is to remove names and identifying details before sharing text, and to use tools the organisation has approved for the sensitivity of the data.",
+      "output": {
+        "question": "What is suggested as a simple safeguard when pasting personal or confidential information into a general-purpose AI chat tool?",
+        "options": [
+          "Use only the most secure AI tools available.",
+          "Share the information without removing identifying details.",
+          "Remove names and identifying details before sharing text.",
+          "Assume the tool is secure and do not take any precautions."
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 1.0
+    },
+    {
+      "passage": "Bias can enter an AI system through historical data that reflects past unfairness, through labels chosen by people, or through a target that is only a proxy for what matters. For example, using past spending as a proxy for need can disadvantage groups who had less access to a service. Choosing the target carefully is as important as choosing the model.",
+      "output": {
+        "question": "According to the passage, what are three ways bias can enter an AI system?",
+        "options": [
+          "Through the choice of the model",
+          "Through labels chosen by people",
+          "Through historical data that reflects past unfairness",
+          "Through the target being only a proxy for what matters"
+        ],
+        "answer_index": 3
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": false,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": false,
+        "no_length_giveaway": false
+      },
+      "score": 0.625
+    },
+    {
+      "passage": "Documentation goes out of date when a system changes. A useful habit is to version the documentation alongside the model, so each release has a matching record of its data, tests and limitations. When documentation and the running system disagree, the documentation stops being evidence and becomes a source of false confidence.",
+      "output": {
+        "question": "What is suggested as a useful habit to maintain documentation when a system changes?",
+        "options": [
+          "Only update the documentation when a major system overhaul occurs.",
+          "Keep the documentation separate from the model for easier updates.",
+          "Version the documentation alongside the model so each release has a matching record of its data, tests, and limitations.",
+          "Ignore documentation discrepancies if the running system is functional."
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Near misses are worth recording even when no harm occurred. They show where controls are weak before a real failure happens. Organisations that only record actual harms tend to learn late, while those that encourage staff to report near misses without fear of blame build an early warning system.",
+      "output": {
+        "question": "What is a key benefit of recording near misses, even when no harm has occurred?",
+        "options": [
+          "It helps in assigning blame after an incident.",
+          "It allows organizations to learn about weak controls before a real failure.",
+          "It is only useful for regulatory compliance.",
+          "It discourages staff from reporting problems."
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Suppliers often update the models behind their products without notice, which can change behaviour that an organisation relied on. Contracts can require advance notice of material changes, and organisations can keep a small set of test cases to rerun after each update to check that important behaviour has not shifted.",
+      "output": {
+        "question": "What is a recommended practice organizations can use to check if important behavior has shifted after a supplier updates the models behind their products?",
+        "options": [
+          "Rely solely on the supplier's documentation",
+          "Ignore updates if they are minor",
+          "Keep a small set of test cases to rerun after each update",
+          "Sign a new contract immediately"
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Records themselves carry risk, because logs of inputs and outputs may contain personal data. Good practice is to decide in advance what to log, who can access the logs, and how long they are kept. Records should be kept long enough to be useful and no longer than necessary.",
+      "output": {
+        "question": "What are the key considerations for managing the risk associated with records that contain personal data?",
+        "options": [
+          "Only log data that is strictly necessary for immediate operations.",
+          "Ensure logs are kept indefinitely for historical analysis.",
+          "Decide in advance what to log, who can access the logs, and how long they are kept.",
+          "Only log data that is anonymized before recording."
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Challenges to AI decisions are also a source of learning. If many people contest the same kind of decision, that pattern may reveal a flaw in the system or its data. Tracking the number and outcome of challenges turns individual complaints into evidence about how well the system works.",
+      "output": {
+        "question": "What is the purpose of tracking the number and outcome of challenges to an AI decision?",
+        "options": [
+          "To measure user satisfaction with the AI system.",
+          "To quantify the popularity of certain decisions.",
+          "To turn individual complaints into evidence about the system's performance.",
+          "To identify which users are most likely to challenge decisions."
+        ],
+        "answer_index": 2
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": true,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": true,
+        "distractors_not_copied": true,
+        "no_length_giveaway": false
+      },
+      "score": 0.875
+    },
+    {
+      "passage": "Monitoring is only useful if someone acts on it. Each measure should have a threshold that triggers a response, such as a review, retraining or pausing the system, and a named person who receives the alert. A dashboard that nobody watches gives the organisation false reassurance.",
+      "output": {
+        "question": "What is the primary condition for monitoring to be useful according to the passage?",
+        "options": [
+          "The monitoring system must be complex and highly detailed.",
+          "Someone must act on the monitoring data.",
+          "A dashboard must be constantly updated by all staff.",
+          "The system must be automated without human intervention."
+        ],
+        "answer_index": 1
+      },
+      "checks": {
+        "is_a_question": true,
+        "stands_alone": false,
+        "four_options": true,
+        "options_distinct": true,
+        "index_valid": true,
+        "correct_grounded": false,
+        "distractors_not_copied": true,
+        "no_length_giveaway": true
+      },
+      "score": 0.75
+    }
+  ],
+  "answer_positions": {
+    "A": 0,
+    "B": 5,
+    "C": 5,
+    "D": 2
+  },
+  "seconds": 2
+}
